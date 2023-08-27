@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.1/css/all.min.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="menu.css"> <!-- Link to the external CSS file -->
+
+  <style>
+    .container {
+      position: relative;
+    }
+
+    /* Hide the Failed Sections button initially */
+    #failedSectionsButton {
+      display: none;
+      position: absolute;
+      bottom: 10px;
+      right: 10px;
+    }
+  </style>
+  <div class="navbar">
+    <a href="#" class="title"><i class="fas fa-tools"></i>Autodits</a>
+    <a href="/menu.html" class="bold-link"><i class="fas fa-house"></i>Home</a>
+    <a href="/index.html" class="bold-link"><i class="fas fa-check-double"></i>Full Audit</a>
+    <div class="dropdown">
+      <a href="#" class="bold-link"><i class="fas fa-list"></i>Sections</a>
+      <div class="dropdown-content">
+        <a href="/section1.html" class="bold-link">Section 1</a>
+        <a href="/section2.html" class="bold-link">Section 2</a>
+        <a href="/section3.html" class="bold-link">Section 3</a>
+        <a href="/section4.html" class="bold-link">Section 4</a>
+        <a href="/section5.html" class="bold-link">Section 5</a>
+        <a href="/section6.html" class="bold-link">Section 6</a>
+      </div>
+    </div>
+    <div class="dropdown">
+      <a href="#" class="bold-link"><i class="fas fa-wrench"></i>Remediation</a>
+      <div class="dropdown-content">
+        <a href="/rem4.html" class="bold-link">Section 4 (Not Recommended)</a>
+        <a href="/rem6.html" class="bold-link">Section 6 (Not Recommended)</a>
+      </div>
+    </div>
+    <a href="/about.html" class="bold-link"><i class="fas fa-user"></i>About Tool</a>
+  </div>
+ 
+  <title>Audit Tool GUI</title>
+</head>
+<body>
+ <div class="main-wrapper">
+  <div class="container">
+    <h1>Section 4: Logging and Auditing</h1>
+    <p id="disclaimer"> *** DISCLAIMER: This automated audit tool is designed to assist in evaluating the security configuration of your system, use at your own risk. ***</p>
+    <p id="note"> *** NOTE: Please run this tool with root user privileges for comprehensive and effective system assessment. ***</p>
+    <button id="runAuditButton">Run Audit</button>
+    <div id="auditResults"></div>
+    <div class="loader" style="display: none;"></div>
+    <div class="loadmsg" style="display: none;">
+      <p> Loading...</p>
+      <p> Running Section 4 Audit: Logging and Auditing </p>
+    </div>
+    <div class="summary" id="summary"></div>
+    <div id="chartContainer">
+      <canvas id="auditChart"></canvas>
+    </div>
+    <button id="failedSectionsButton">Failed Sections</button>
+  </div>
+  <script>
+    const runAuditButton = document.getElementById('runAuditButton');
+    const failedSectionsButton = document.getElementById('failedSectionsButton');
+    const auditResultsDiv = document.getElementById('auditResults');
+    const summaryDiv = document.getElementById('summary');
+    const loaderDiv = document.querySelector('.loader'); 
+    const loadmsgDiv = document.querySelector('.loadmsg');
+
+    runAuditButton.addEventListener('click', () => {
+      runAuditButton.style.display = 'none';
+      loaderDiv.style.display = 'block';
+      loadmsgDiv.style.display = 'block';      
+      fetch('/runS4')
+        .then(response => response.text())
+        .then(output => {
+          output = convertAnsiToHtml(output);
+          auditResultsDiv.innerHTML = `<pre>${output}</pre>`;
+          displaySummary(output);
+          
+	  // Hide the loading button
+          loaderDiv.style.display = 'none';
+          loadmsgDiv.style.display = 'none';
+          // Show the Failed Sections button after audit results are displayed
+          failedSectionsButton.style.display = 'block';
+        })
+        .catch(error => {
+          console.error('Error fetching audit results:', error);
+        });
+    });
+    
+         failedSectionsButton.addEventListener('click', () => {
+      fetch('/failedSections4')
+        .then(response => response.text())
+        .then(failedSections => {
+          const coloredSections = convertAnsiToHtml(failedSections);
+          const plainSections = noColor(coloredSections);
+
+          const newWindow = window.open('', '_blank');
+          newWindow.document.write(`
+            <style>
+          pre {
+            white-space: pre-wrap;
+          }
+          #exportFailedSectionsButton {
+              position: fixed;
+              bottom: 1rem;
+              right: 1rem;
+              font-size: 16px;
+              padding: 10px 20px;
+              background-color: #007bff;
+              color: white;
+              border: none;
+              border-radius: 5px;
+              cursor: pointer;
+          }
+          #exportFailedSectionsButton:hover {
+            background-color: #0056b3;
+          }
+            </style>
+            <pre>${coloredSections}</pre>
+            <button id="exportFailedSectionsButton">Download</button>
+          `);
+          newWindow.document.close();
+
+          newWindow.document.getElementById('exportFailedSectionsButton').addEventListener('click', () => {
+            downloadTextFile(plainSections, 'section4_failed_sections.txt');
+          });
+
+        })
+        .catch(error => {
+          console.error('Error fetching failed sections:', error);
+        });
+    });
+
+    exportFailedSectionsButton.addEventListener('click', () => {
+      exportFailedSections();
+    });
+
+    function exportFailedSections() {
+      fetch('/failedSections4')
+        .then(response => response.text())
+        .then(failedSections => {
+          downloadTextFile(failedSections, 'failed_sections.txt');
+        })
+        .catch(error => {
+          console.error('Error fetching failed sections:', error);
+        });
+    }
+
+    function displaySummary(output) {
+      const passCount = (output.match(/\bPass\b/ig) || []).length;
+      const failCount = (output.match(/\bFail\b/ig) || []).length;
+      const notAccessedCount = (output.match(/Not-Accessed/ig) || []).length;
+
+      const summaryHTML = `
+        <h2>Audit Results Summary</h2>
+        <table>
+          <tr>
+            <td>Total Audits:</td>
+            <td>${passCount + failCount + notAccessedCount}</td>
+          </tr>
+          <tr class="green">
+            <td>Pass Count:</td>
+            <td>${passCount}</td>
+          </tr>
+          <tr class="red">
+            <td>Fail Count:</td>
+            <td>${failCount}</td>
+          </tr>
+          <tr class="blue">
+            <td>Not-Accessed Count:</td>
+            <td>${notAccessedCount}</td>
+          </tr>
+        </table>
+      `;
+
+      summaryDiv.innerHTML = summaryHTML;
+      createPieChart(passCount, failCount, notAccessedCount);
+    }
+
+    function convertAnsiToHtml(text) {
+      text = text.replace(/\033\[0;31m/g, '<span style="color: red;">'); // Red
+      text = text.replace(/\033\[0;41m/g, '<span class="hred">'); // Red with background
+      text = text.replace(/\033\[01;32m/g, '<span style="color: green;">'); // Green
+      text = text.replace(/\033\[0;33m/g, '<span class="orange">'); // Orange
+      text = text.replace(/\033\[0;34m/g, '<span class="blue">'); // Blue
+      text = text.replace(/\033\[0m/g, '</span>'); // Reset color
+      return text;
+    }
+
+    function noColor(text) {
+     text = text.replace(/<span style="color: red;">/g, ''); // Remove red color span
+     text = text.replace(/<span class="hred">/g, ''); // Remove red with background color span
+     text = text.replace(/<span style="color: green;">/g, ''); // Remove green color span
+     text = text.replace(/<span class="orange">/g, ''); // Remove orange color span
+     text = text.replace(/<span class="blue">/g, ''); // Remove blue color span
+     text = text.replace(/<\/span>/g, ''); // Remove closing span tags
+     return text;
+    }
+
+        function downloadTextFile(content, filename) {
+      const element = document.createElement('a');
+      element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(content));
+      element.setAttribute('download', filename);
+      element.style.display = 'none';
+      document.body.appendChild(element);
+      element.click();
+      document.body.removeChild(element);
+    }
+
+
+
+    function createPieChart(passCount, failCount, notAccessedCount) {
+      const auditChart = document.getElementById('auditChart');
+      new Chart(auditChart, {
+        type: 'pie',
+        data: {
+          labels: ['Pass', 'Fail', 'Not-Accessed'],
+          datasets: [
+            {
+              data: [passCount, failCount, notAccessedCount],
+              backgroundColor: ['green', 'red', 'blue'],
+            },
+          ],
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+        },
+      });
+    }
+  </script>
+</body>
+</html>
+

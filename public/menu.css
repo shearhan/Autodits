@@ -1,0 +1,111 @@
+/* menu.css */
+
+body, h1, h2, h3, p, ul, li {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: Oswald, sans-serif;
+  /*background-color: #e6e6fa;*/
+  /*margin-top: 120px;*/
+  background-image: url('back.jpg'); /* Add this line for the background image */
+  background-size: cover; /* Adjust as needed */
+}
+
+.navbar {
+  background-color: #355E3B;
+  font-family: Open Sans, sans-serif;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 0;
+  border-radius: 0;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 200;
+}
+
+.navbar .fas {
+  margin-right: 8px;
+}
+
+.navbar a {
+  font-size: 16px;
+  color: white;
+  text-align: center;
+  text-decoration: none;
+  transition: background-color 0.3s;
+  padding: 10px 20px;
+  margin: 0 10px;
+}
+
+.navbar a:hover {
+  background-color: #555;
+}
+
+.dropdown {
+  position: relative;
+}
+
+.dropdown a {
+  font-size: 16px;
+  border: none;
+  outline: none;
+  color: white;
+  background-color: inherit;
+  font-family: inherit;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  font-weight: bold;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: white;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  z-index: 100;
+  border-radius: 4px;
+}
+
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+  text-align: left;
+  transition: background-color 0.3s;
+  font-weight: bold;
+}
+
+.dropdown-content a:hover {
+  background-color: #f2f2f2;
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+  z-index: 100;
+}
+
+
+.bold-link {
+  font-weight: bold;
+}
+
+.navbar .title {
+  font-family: cursive;
+  font-size: 24px;
+  line-height: 1;
+ /* margin: 8px 16px;*/
+  padding: 0 16px;
+  color: white;
+  text-decoration: none;
+  align-items: flex-start;;
+  margin: 0 16px 0 0;
+}
+
+/* ... (other CSS rules) ... */
+

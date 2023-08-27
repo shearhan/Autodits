@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.1/css/all.min.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="menu.css"> <!-- Link to the external CSS file -->
+
+  <div class="navbar">
+    <a href="#" class="title"><i class="fas fa-tools"></i>Autodits</a>
+    <a href="/menu.html" class="bold-link"><i class="fas fa-house"></i>Home</a>
+    <a href="/index.html" class="bold-link"><i class="fas fa-check-double"></i>Full Audit</a>
+    <div class="dropdown">
+      <a href="#" class="bold-link"><i class="fas fa-list"></i>Sections</a>
+      <div class="dropdown-content">
+        <a href="/section1.html" class="bold-link">Section 1</a>
+        <a href="/section2.html" class="bold-link">Section 2</a>
+        <a href="/section3.html" class="bold-link">Section 3</a>
+        <a href="/section4.html" class="bold-link">Section 4</a>
+        <a href="/section5.html" class="bold-link">Section 5</a>
+        <a href="/section6.html" class="bold-link">Section 6</a>
+      </div>
+    </div>
+    <div class="dropdown">
+      <a href="#" class="bold-link"><i class="fas fa-wrench"></i>Remediation</a>
+      <div class="dropdown-content">
+        <a href="/rem4.html" class="bold-link">Section 4 (Not Recommended)</a>
+	<a href="/rem6.html" class="bold-link">Section 6 (Not Recommended)</a>
+      </div>
+    </div>
+    <a href="/about.html" class="bold-link"><i class="fas fa-user"></i>About Tool</a>
+  </div>
+
+  <title>Audit Tool GUI</title>
+</head>
+<body>
+ <div class="main-wrapper">
+  <div class="container">
+    <h1>Remediation Section 4: Logging and Auditing<br> (NOT RECOMMENDED)</h1>
+    <p id="disclaimer"> *** DISCLAIMER: This automated audit tool is designed to assist in evaluating the security configuration of your system, use at your own risk. ***</p>
+    <p id="note"> *** NOTE: Please run this tool with root user privileges for comprehensive and effective system assessment. ***<br>
+                  *** NOTE: Some of the sections will be classified as "Could not remediate" for either safety reasons or it requires user input or manual configuration.</p>
+    <button id="runAuditButton">Run Remediation</button>
+    <div class="loader" style="display: none;"></div>
+    <div class="loadmsg" style="display: none;">
+      <p> Loading...</p>
+      <p> Running Section 4 Remediation: Logging and Auditing </p>
+    </div>
+    <div id="auditResults"></div>
+
+    <script>
+   const runAuditButton = document.getElementById('runAuditButton');
+   const auditResultsDiv = document.getElementById('auditResults');
+   const loaderDiv = document.querySelector('.loader');
+   const loadmsgDiv = document.querySelector('.loadmsg');
+
+   runAuditButton.addEventListener('click', () => {
+     showConfirmation(); // Show the confirmation popup
+   });
+
+   function showConfirmation() {
+    const confirmed = confirm("Are you sure you want to remediate section 4?\nNote: This remediation script MIGHT alter some configurations in your system.");
+    if (confirmed) {
+      runAuditButton.style.display = 'none';
+      loaderDiv.style.display = 'block';
+      loadmsgDiv.style.display = 'block';
+      fetch('/runR4')
+        .then(response => response.text())
+        .then(output => {
+          output = convertAnsiToHtml(output);
+          auditResultsDiv.innerHTML = `<pre>${output}</pre>`;
+          loaderDiv.style.display = 'none';
+          loadmsgDiv.style.display = 'none';
+        })
+        .catch(error => {
+          console.error('Error fetching audit results:', error);
+        });
+    }
+  }
+
+    function convertAnsiToHtml(text) {
+      text = text.replace(/\033\[0;31m/g, '<span style="color: red;">'); // Red
+      text = text.replace(/\033\[01;31m/g, '<span style="color: red;">'); // red
+      text = text.replace(/\033\[01;32m/g, '<span style="color: green;">'); // green
+      text = text.replace(/\033\[0;41m/g, '<span class="hred">'); // Red with background
+      text = text.replace(/\033\[0;32m/g, '<span style="color: green;">'); // Green
+      text = text.replace(/\033\[0;33m/g, '<span class="orange">'); // Orange
+      text = text.replace(/\033\[0;34m/g, '<span class="blue">'); // Blue
+      text = text.replace(/\033\[0m/g, '</span>'); // Reset color
+      text = text.replace(/\033\[01;37m/g, '<span style="color: black; font-weight: bold;">');
+      return text;
+    }
+</script>
+</body>
+</html>
+

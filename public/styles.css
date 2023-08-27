@@ -1,0 +1,156 @@
+/* styles.css */
+
+/* Reset some default margins and paddings */
+body, h1, h2, p {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f5f5f5;
+}
+
+.container {
+  max-width: 1040px;
+  margin: 60px auto;
+  padding: 20px;
+  z-index: 1;
+ /* background-color: #fff;*/
+/*  background-color: rgba(255, 255, 255, 0.8);  Translucent white background */
+ /* box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);*/
+  background-color: white;
+}
+
+h1 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+button {
+  display: block;
+  margin: 20px auto;
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+th, td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: left;
+}
+
+th {
+  background-color: #f5f5f5;
+}
+
+.summary {
+  margin-top: 20px;
+  text-align: center;
+}
+
+/* Additional style for orange color */
+.orange {
+  color: orange;
+}
+
+/* Additional style for blue color */
+.blue {
+  color: blue;
+}
+
+.green {
+  color: green;
+}
+
+.red {
+  color: red;
+}
+
+.hred {
+  background-color: red;
+  color: white;
+}
+
+/* Style for the chart container */
+#chartContainer {
+  margin-top: 20px;
+  text-align: center;
+}
+
+/* Style for the chart canvas */
+#auditChart {
+  max-width: 100%;
+  height: auto;
+}
+
+
+.main-wrapper {
+  background-color: #e6e6fa; /* Light purple color */
+  padding: 20px; /* Add padding to control the space between the content and sides */
+  min-height: 100vh; /* Ensure the background covers the entire viewport height */
+  box-sizing: border-box;
+  z-index: 0;
+}
+    #disclaimer,#note {
+      color: red;
+      font-weight: bold; /* Make the text bold */
+      text-align: center;
+    }
+.loader {
+  border: 16px solid #f3f3f3; /* Light grey */
+  border-top: 16px solid #3498db; /* Blue */
+  border-radius: 50%;
+  width: 100px;
+  height: 100px;
+  animation: spin 2s linear infinite;
+  margin: auto;
+  margin-top: 20px;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.loadmsg {
+  color: black;
+  font-weight: bold; /* Make the text bold */
+  text-align: center;
+  margin-top: 20px;
+}
+
+  /* Add a rule to style the container for failed sections */
+  .failed-sections-container {
+    padding: 10px; /* Adjust padding as needed */
+    max-width: 1200px;
+    margin: 0 auto;
+    background-color: #fff;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+
+  }
+
+  /* Apply the separator line style to each separator within the container */
+  .separator-line {
+    width: 100%;
+    border-top: 1px solid #ccc;
+    margin-top: 10px;
+    margin-bottom: 10px;
+  
+  }
+
+  .nc {
+    color: black;
+  }
+
+

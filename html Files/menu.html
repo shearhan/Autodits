@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Automated Audit Tool Menu</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.1/css/all.min.css">
+  <link rel="stylesheet" href="menu.css">
+  <style>
+    body {
+      font-family: 'Lato' , cursive;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background-color: #e6e6fa; /* Background color */
+    }
+
+    .container {
+      align-items: center;
+      justify-content: center;
+      padding: 50px;
+      text-align: center;
+      max-width: 1000px; /* Adjust container width */
+      margin: auto; /* Center horizontally */
+      background-color: rgba(255, 255, 255, 0.8); /* Container background color */
+      border-radius: 10px; /* Rounded corners */
+      box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2); /* Box shadow */
+    }
+
+    .heading {
+      font-family: Arial, sans-serif;
+      font-family: cursive;
+      font-size: 64px;
+      font-weight: bold;
+      margin-top: 20px;
+      text-align: center;
+    }
+
+    .description {
+      font-family: Arial, sans-serif;
+      font-size: 18px;
+      line-height: 1.6;
+      text-align: center;
+    }
+
+    .bold-link {
+      font-weight: bold;
+    }
+
+    .para {
+      display: block;
+      margin-top: 10px;
+    }
+
+    .button-container {
+      margin-top: 20px;
+      text-align: center; /* Center the button */
+    }
+
+    .learn-button {
+      padding: 10px 20px;
+      font-family: Arial, sans-serif;
+      font-family: cursive;
+      font-size: 20px;
+      background-color: #333;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .learn-button:hover {
+      background-color: #444;
+    }
+  </style>
+</head>
+<body>
+  <div class="navbar">
+    <a href="#" class="title"><i class="fas fa-tools"></i>Autodits</a>
+    <a href="/menu.html" class="bold-link"><i class="fas fa-house"></i>Home</a>
+    <a href="/index.html" class="bold-link"><i class="fas fa-check-double"></i>Full Audit</a>
+    <div class="dropdown">
+      <a href="#" class="bold-link"><i class="fas fa-list"></i>Sections</a>
+      <div class="dropdown-content">
+        <a href="/section1.html" class="bold-link">Section 1</a>
+        <a href="/section2.html" class="bold-link">Section 2</a>
+        <a href="/section3.html" class="bold-link">Section 3</a>
+        <a href="/section4.html" class="bold-link">Section 4</a>
+        <a href="/section5.html" class="bold-link">Section 5</a>
+        <a href="/section6.html" class="bold-link">Section 6</a>
+      </div>
+    </div>
+    <div class="dropdown">
+      <a href="#" class="bold-link"><i class="fas fa-wrench"></i>Remediation</a>
+      <div class="dropdown-content">
+        <a href="/rem6.html" class="bold-link">Section 6 (Not Encouraged)</a>
+      </div>
+    </div>
+    <a href="/about.html" class="bold-link"><i class="fas fa-user"></i>About Tool</a>
+  </div>
+
+  <div class="container">
+    <h1 class="heading">Automated Audit Tool Menu</h1>
+    <p class="description">
+      <span class="bold-link">Run a comprehensive system assessment, including Full Audit, individual section evaluations, and remediation for identified issues.</span>
+    </p>
+    <div class="button-container">
+      <a href="/about.html" class="learn-button">Learn more</a>
+    </div>
+  </div>
+</body>
+</html>
+

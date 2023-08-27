@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About Tool - Autodits</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.1/css/all.min.css">
+  <link rel="stylesheet" href="menu.css">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background-color: #e6e6fa; /* Background color */
+    }
+
+    .about-container{
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 50px;
+      text-align: center;
+      max-width: 1600px; /* Adjust container width */
+      margin: auto; /* Center horizontally */
+      background-color: rgba(255, 255, 255, 0.8); /* Container background color */
+      border-radius: 10px; /* Rounded corners */
+      box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2); /* Box shadow */
+      margin-top: 180px;
+    }
+
+    .about-container img {
+      max-width: 40%;
+      height: auto;
+      max-height: 600px; /* Adjust image height as needed */
+      padding: 20px;
+    }
+
+    .about {
+      font-family: Arial, sans-serif;
+      font-size: 32px;
+      font-family: cursive;
+      font-weight: bold;
+      margin-bottom: 10px;
+      text-align: center;
+    }
+
+    .description {
+      font-family: Arial, sans-serif;
+      font-size: 18px;
+      line-height: 1.6;
+      text-align: left;
+    }
+  </style>
+</head>
+<body>
+  <div class="navbar">
+    <a href="#" class="title"><i class="fas fa-tools"></i>Autodits</a>
+    <a href="/menu.html" class="bold-link"><i class="fas fa-house"></i>Home</a>
+    <a href="/index.html" class="bold-link"><i class="fas fa-check-double"></i>Full Audit</a>
+    <div class="dropdown">
+      <a href="#" class="bold-link"><i class="fas fa-list"></i>Sections</a>
+      <div class="dropdown-content">
+        <a href="/section1.html" class="bold-link">Section 1</a>
+        <a href="/section2.html" class="bold-link">Section 2</a>
+        <a href="/section3.html" class="bold-link">Section 3</a>
+        <a href="/section4.html" class="bold-link">Section 4</a>
+        <a href="/section5.html" class="bold-link">Section 5</a>
+        <a href="/section6.html" class="bold-link">Section 6</a>
+      </div>
+    </div>
+    <div class="dropdown">
+      <a href="#" class="bold-link"><i class="fas fa-wrench"></i>Remediation</a>
+      <div class="dropdown-content">
+        <a href="/rem4.html" class="bold-link">Section 4 (Not Recommended)</a>
+        <a href="/rem6.html" class="bold-link">Section 6 (Not Recommended)</a>
+      </div>
+    </div>
+    <a href="/about.html" class="bold-link"><i class="fas fa-user"></i>About Tool</a>
+  </div>
+  <div class="about-container">
+    <img src="about.jpg" alt="Tool Image">
+    <div class="text-container">
+      <h1 class="about">About Autodits</h1>
+      <p class="description">
+        Our Autodits Tool empowers users with a comprehensive system assessment, including a Full Audit, targeted evaluation of specific Benchmark sections, and assistance in implementing effective remedies for any identified issues.<br><br>
+        Our automated audit tool provides various functionalities:<br><br>
+	- Full Audit: This feature runs all sections of the Benchmark (Ubuntu LTS 22.04 v1.0).<br><br>
+	- Sections: This capability enables the execution of individual sections within the Benchmark, spanning from section 1 to 6. Moreover, upon initiating the audit, users will gain access to comprehensive insights and in-depth information pertaining to any sections that may have encountered failures during the execution.<br><br>
+        - Remediation: Implement the suggested solution/remediation for the sections that have experienced failures during execution.
+      </p>
+    </div>
+  </div>
+</body>
+</html>
+
