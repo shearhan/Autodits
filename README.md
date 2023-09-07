@@ -1,4 +1,5 @@
 # Autodits
+TAKE NOTE: For the remediation feature, it only covers section 4 and 6 of the CIS benchmark, thank you :)
 
 This is the source code for my group's tool named Autodits. This is an automated audit tool for Linux.
 
